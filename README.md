@@ -15,3 +15,8 @@ The app has to use Swift UI, Combine, ViewModels and repositories (MVVM with rep
  as the value to match between the fetched data and the persisted character, which is say, you only need to perist the character's name in user defaults.
 
 * If the user goes out from the app and back in, if the fetched list of items contains the liked character, it should still be reflected as the "liked" character.
+
+* Tip: when publishing the list of characters, add a new parameter to each character: `isPrefered`, and compare the name of the `liked` character to each one, as to know if that flag should be set to true. 
+
+
+* If you have time for it, please add unit tests for your Viewmodel, and repository.
