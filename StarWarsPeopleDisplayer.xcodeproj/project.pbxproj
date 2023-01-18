@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043240CA29772FF700728BEE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043240C929772FF700728BEE /* Model.swift */; };
+		043240CD2977314500728BEE /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043240CC2977314500728BEE /* RemoteDataSource.swift */; };
+		043240D32977506000728BEE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043240D22977506000728BEE /* ContentViewModel.swift */; };
 		7E1BC3C729772A03003951C1 /* StarWarsPeopleDisplayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BC3C629772A03003951C1 /* StarWarsPeopleDisplayerApp.swift */; };
 		7E1BC3C929772A03003951C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BC3C829772A03003951C1 /* ContentView.swift */; };
 		7E1BC3CB29772A04003951C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1BC3CA29772A04003951C1 /* Assets.xcassets */; };
@@ -34,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043240C929772FF700728BEE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		043240CC2977314500728BEE /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
+		043240D1297745CE00728BEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		043240D22977506000728BEE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7E1BC3C329772A03003951C1 /* StarWarsPeopleDisplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWarsPeopleDisplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1BC3C629772A03003951C1 /* StarWarsPeopleDisplayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPeopleDisplayerApp.swift; sourceTree = "<group>"; };
 		7E1BC3C829772A03003951C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +78,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043240CB2977310800728BEE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				043240C929772FF700728BEE /* Model.swift */,
+				043240CC2977314500728BEE /* RemoteDataSource.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		043240CE297735BE00728BEE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7E1BC3C829772A03003951C1 /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		043240D0297735D300728BEE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				043240D22977506000728BEE /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7E1BC3BA29772A03003951C1 = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +126,11 @@
 		7E1BC3C529772A03003951C1 /* StarWarsPeopleDisplayer */ = {
 			isa = PBXGroup;
 			children = (
+				043240D1297745CE00728BEE /* Info.plist */,
+				043240D0297735D300728BEE /* ViewModel */,
+				043240CB2977310800728BEE /* Data */,
 				7E1BC3C629772A03003951C1 /* StarWarsPeopleDisplayerApp.swift */,
-				7E1BC3C829772A03003951C1 /* ContentView.swift */,
+				043240CE297735BE00728BEE /* UI */,
 				7E1BC3CA29772A04003951C1 /* Assets.xcassets */,
 				7E1BC3CC29772A04003951C1 /* Preview Content */,
 			);
@@ -257,8 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043240CD2977314500728BEE /* RemoteDataSource.swift in Sources */,
+				043240CA29772FF700728BEE /* Model.swift in Sources */,
 				7E1BC3C929772A03003951C1 /* ContentView.swift in Sources */,
 				7E1BC3C729772A03003951C1 /* StarWarsPeopleDisplayerApp.swift in Sources */,
+				043240D32977506000728BEE /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +458,7 @@
 				DEVELOPMENT_TEAM = S863WZA6HJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = StarWarsPeopleDisplayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -449,7 +487,7 @@
 				DEVELOPMENT_TEAM = S863WZA6HJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = StarWarsPeopleDisplayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
