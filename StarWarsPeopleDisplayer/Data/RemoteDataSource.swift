@@ -8,17 +8,15 @@
 import Foundation
 import Combine
 
-class RemoteDataSource: ObservableObject {
+class RemoteDataSource: ObservableObject, RemoteDataSourceProtocol {
     
-    static let shared = RemoteDataSource()
-    
-    @Published var people: [People] = []
-    @Published var hasError = false
+    var remoteprotocol: RemoteDataSourceProtocol?
     
     private var cancellables = Set<AnyCancellable>()
     
-    func fetchStarWarsPeople(_ url: String ) -> AnyPublisher<[People], Error> {
+    func fetchStarWarsPeople() -> AnyPublisher<[People], Error> {
         
+        let url = "https://swapi.dev/api/people"
         let urlString: URL = URL(string: url)!
     
         return URLSession.shared
@@ -34,5 +32,8 @@ class RemoteDataSource: ObservableObject {
     }
 }
 
+public protocol RemoteDataSourceProtocol {
+    func fetchStarWarsPeople() -> AnyPublisher<[People], Error>
+}
 
 

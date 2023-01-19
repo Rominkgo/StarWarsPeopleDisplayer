@@ -11,14 +11,9 @@ struct ApiResults: Decodable {
     var results: [People]
 }
 
-struct People: Decodable {
+public struct People: Decodable {
     var name: String
     var gender: String
-    
-    enum CodingKeys: CodingKey {
-        case name
-        case gender
-    }
 }
 
 struct LikablePerson {

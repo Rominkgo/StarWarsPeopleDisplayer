@@ -11,26 +11,33 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     
-    init() {
+    private let datasource: RemoteDataSourceProtocol
+    
+    init(datasource: RemoteDataSourceProtocol) {
+        self.datasource = datasource
         self.likedPersonExists = UserDefaults.standard.bool(forKey: "likedPersonExists")
     }
     
     private var cancellables = Set<AnyCancellable>()
     
     @Published var people: [LikablePerson] = []
+    @Published var errorHandler: String = ""
     
     var likedPersonExists: Bool = false {
         didSet {
             UserDefaults.standard.set(likedPersonExists, forKey: "likedPersonExists")
         }
     }
-    
-    private let dataSource: RemoteDataSource = RemoteDataSource()
-    
+
     func getPeopleData() {
-        RemoteDataSource.shared.fetchStarWarsPeople("https://swapi.dev/api/people")
+        datasource.fetchStarWarsPeople()
             .sink(receiveCompletion: {response in
-                print("Good")
+                switch response {
+                case .finished:
+                    print("Call finish")
+                case .failure(_):
+                    self.errorHandler = "There was an error with the api"
+                }
             }, receiveValue: { [weak self] res in
                 let likeablePeople = res.map { person in
                    LikablePerson(personInfo: person, isLiked: false)
@@ -41,17 +48,23 @@ class ContentViewModel: ObservableObject {
             .store(in: &cancellables )
     }
     
-    func markPersonLiked(_ person: LikablePerson) {
-
+    func findIndex(of person: LikablePerson) -> Int {
+        
         let likedIndex = people.firstIndex { candidate in
             candidate.personInfo.name == person.personInfo.name
         }
         guard let safeIndex = likedIndex else {
-            return
+            return 0
         }
         
-        if people.count >= safeIndex,
-            likedPersonExists == false
+        return safeIndex
+    }
+    
+    func markPersonLiked(_ person: LikablePerson) {
+        
+        let safeIndex = findIndex(of: person)
+
+        if people.count >= safeIndex, likedPersonExists == false
         {
             print(person.personInfo.name + " Loved")
             people[safeIndex] = LikablePerson(personInfo: person.personInfo, isLiked: true)
@@ -61,12 +74,7 @@ class ContentViewModel: ObservableObject {
     }
     
     func markPersonUnliked(_ person: LikablePerson) {
-        let likedIndex = people.firstIndex { candidate in
-            candidate.personInfo.name == person.personInfo.name
-        }
-        guard let safeIndex = likedIndex else {
-            return
-        }
+        let safeIndex = findIndex(of: person)
         
         if people.count >= safeIndex {
             print(person.personInfo.name + " UNLoved")
@@ -78,6 +86,7 @@ class ContentViewModel: ObservableObject {
     
     func checkForLikedPerson() {
         let savedPerson = UserDefaults.standard.string(forKey: "FavouritePerson")
+        
         let likedIndex = people.firstIndex { candidate in
             candidate.personInfo.name == savedPerson
         }

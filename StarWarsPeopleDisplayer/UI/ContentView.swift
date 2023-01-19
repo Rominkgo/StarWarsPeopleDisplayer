@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var vm: ContentViewModel = ContentViewModel()
-    @State var selectedFavourite: People?
+    @StateObject var vm: ContentViewModel = ContentViewModel(datasource: RemoteDataSource())
     
     var body: some View {
         VStack {
@@ -41,7 +40,6 @@ struct ContentView: View {
                 }
             }
             .onAppear(perform: { vm.getPeopleData() })
-            .onAppear(perform: {DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {vm.checkForLikedPerson()})})
             .padding()
         }
     }
