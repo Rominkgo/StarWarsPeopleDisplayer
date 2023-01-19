@@ -15,7 +15,6 @@ class RemoteDataSource: ObservableObject, RemoteDataSourceProtocol {
     private var cancellables = Set<AnyCancellable>()
     
     func fetchStarWarsPeople() -> AnyPublisher<[People], Error> {
-        
         let url = "https://swapi.dev/api/people"
         let urlString: URL = URL(string: url)!
     
