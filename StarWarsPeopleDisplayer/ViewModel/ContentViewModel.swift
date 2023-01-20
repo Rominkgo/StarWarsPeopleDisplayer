@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    
+
     private let datasource: RemoteDataSourceProtocol
     
     init(datasource: RemoteDataSourceProtocol) {
@@ -22,6 +22,7 @@ class ContentViewModel: ObservableObject {
     
     @Published var people: [LikablePerson] = []
     @Published var errorHandler: String = ""
+    @Published var isLoading: Bool = true
     
     var likedPersonExists: Bool = false {
         didSet {
@@ -30,6 +31,7 @@ class ContentViewModel: ObservableObject {
     }
 
     func getPeopleData() {
+        self.isLoading = true
         datasource.fetchStarWarsPeople()
             .sink(receiveCompletion: {response in
                 switch response {
@@ -44,6 +46,7 @@ class ContentViewModel: ObservableObject {
                 }
                 self?.people = likeablePeople
                 self?.checkForLikedPerson()
+                self?.isLoading = false
             })
             .store(in: &cancellables )
     }
