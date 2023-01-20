@@ -20,3 +20,12 @@ struct LikablePerson {
     var personInfo: People
     var isLiked: Bool
 }
+
+struct PeopleDetails: Decodable {
+    var name: String
+    var description: String
+    var gender: String
+    var image: String
+    var species: String
+    var height: String
+}

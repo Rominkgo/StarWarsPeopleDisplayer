@@ -29,10 +29,27 @@ class RemoteDataSource: ObservableObject, RemoteDataSourceProtocol {
                 return people.results
             }).eraseToAnyPublisher()
     }
+    
+    func fetchStarWarsPeopleDetails() -> AnyPublisher<[PeopleDetails], Error> {
+        let url = "http://intergalacticdb.me/api/characters"
+        let urlString: URL = URL(string: url)!
+    
+        return URLSession.shared
+            .dataTaskPublisher(for: urlString)
+            .receive(on: DispatchQueue.main)
+            .tryMap({ data, reponse in
+                let decoder = JSONDecoder()
+                guard let people = try? decoder.decode([PeopleDetails].self, from: data) else {
+                    throw fatalError("No data")
+                }
+                return people
+            }).eraseToAnyPublisher()
+    }
 }
 
-public protocol RemoteDataSourceProtocol {
+protocol RemoteDataSourceProtocol {
     func fetchStarWarsPeople() -> AnyPublisher<[People], Error>
+    func fetchStarWarsPeopleDetails() -> AnyPublisher<[PeopleDetails], Error>
 }
 
 
