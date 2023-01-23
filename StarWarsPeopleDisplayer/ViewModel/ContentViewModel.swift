@@ -21,7 +21,7 @@ class ContentViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var people: [LikablePerson] = []
-    @Published var peopleDetails: [PeopleDetails] = []
+
     @Published var errorHandler: String = ""
     @Published var isLoading: Bool = true
     
@@ -51,23 +51,7 @@ class ContentViewModel: ObservableObject {
             })
             .store(in: &cancellables )
     }
-    
-    
-    func getPeopleDetailsData() {
-        datasource.fetchStarWarsPeopleDetails()
-            .sink { response in
-                switch response {
-                case .finished:
-                    print("Call finish")
-                case .failure:
-                    self.errorHandler = "There was an error with the API"
-                }
-            } receiveValue: { [weak self] res in
-                self?.peopleDetails.append(contentsOf: res)
-            }
 
-    }
-    
     
     func findIndex(of person: LikablePerson) -> Int {
         

@@ -31,7 +31,8 @@ class RemoteDataSource: ObservableObject, RemoteDataSourceProtocol {
     }
     
     func fetchStarWarsPeopleDetails() -> AnyPublisher<[PeopleDetails], Error> {
-        let url = "http://intergalacticdb.me/api/characters"
+//        let url = "https://akabab.github.io/starwars-api/api/all.json"
+      let url = "https://swapi.dev/api/people"
         let urlString: URL = URL(string: url)!
     
         return URLSession.shared
@@ -42,6 +43,7 @@ class RemoteDataSource: ObservableObject, RemoteDataSourceProtocol {
                 guard let people = try? decoder.decode([PeopleDetails].self, from: data) else {
                     throw fatalError("No data")
                 }
+                print(people)
                 return people
             }).eraseToAnyPublisher()
     }
@@ -51,5 +53,6 @@ protocol RemoteDataSourceProtocol {
     func fetchStarWarsPeople() -> AnyPublisher<[People], Error>
     func fetchStarWarsPeopleDetails() -> AnyPublisher<[PeopleDetails], Error>
 }
+
 
 
